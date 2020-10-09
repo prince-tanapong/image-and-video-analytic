@@ -22,10 +22,10 @@ python_mask[condition] = 255
 
 # calculate position of python image that place in the middle of pokemon image
 condition = (python_mask[:, :, :] == 0)
-pokemon_middle_x = pokemon_img.shape[0] / 2
-pokemon_middle_y = pokemon_img.shape[1] / 2
-python_middle_x = python_img.shape[0] / 2
+pokemon_middle_y = pokemon_img.shape[0] / 2
+pokemon_middle_x = pokemon_img.shape[1] / 2
 python_middle_y = python_img.shape[0] / 2
+python_middle_x = python_img.shape[1] / 2
 start_x = int(pokemon_middle_x - python_middle_x)
 end_x = int(pokemon_middle_x + python_middle_x)
 start_y = int(pokemon_middle_y - python_middle_y)
@@ -33,7 +33,7 @@ end_y = int(pokemon_middle_y + python_middle_y)
 
 # create a new copy of merge image so can reduce opacity of python sign
 merge_poke_n_opencv_n_python = merge_poke_n_open_cv.copy()
-merge_poke_n_opencv_n_python[start_x: end_x, start_y: end_y, :][condition] = python_img[condition]
+merge_poke_n_opencv_n_python[start_y: end_y, start_x: end_x, :][condition] = python_img[condition]
 merge = cv2.addWeighted(merge_poke_n_open_cv, 0.7, merge_poke_n_opencv_n_python, 0.3, 0)
 
 cv2.imshow('Pokemon Orignal', pokemon_img)
